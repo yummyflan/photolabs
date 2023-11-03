@@ -1,21 +1,23 @@
-import React from "react";
+import React, { useCallback } from "react";
 
 import "../styles/PhotoListItem.scss";
 
+const PhotoListItem = (props) => {
+  const { id, city, country, imageSource, username, profile } = props
+  return (
+    <article>
+      <img id={id} src={imageSource} />
+      <img src={profile} />
+      <p>
+        {username}
+      </p>
+      <p>
+        {city}, {country}
+      </p>
 
-const sampleDataForPhotoListItem = {
-  id: "1",
-  location: {
-    city: "Montreal",
-    country: "Canada",
-  },
-  imageSource: `${process.env.PUBLIC_URL}/Image-1-Regular.jpeg`,
-  username: "Joe Example",
-  profile: `${process.env.PUBLIC_URL}/profile-1.jpg`,
-};
+    </article>
 
-const PhotoListItem = () => {
-  /* Insert React */
+  )
 };
 
 export default PhotoListItem;
