@@ -15,11 +15,31 @@ const sampleDataForPhotoListItem = {
   profile: `${process.env.PUBLIC_URL}/profile-1.jpg`,
 };
 
+
 const App = () => {
   const { id, location, imageSource, username, profile } = sampleDataForPhotoListItem
+  const samplePhoto = 
+      <PhotoListItem 
+      key={id} 
+      id={id} 
+      city={location.city} 
+      country={location.country} 
+      imageSource={imageSource} 
+      username={username}  
+      profile={profile}/>;
+  
+  const photos = new Array(3).fill(samplePhoto)
   return (
     <div className="App">
-      <PhotoListItem key={id} id={id} city={location.city} country={location.country} imageSource={imageSource} username={username}  profile={profile}/>
+      {/* <PhotoListItem 
+      key={id} 
+      id={id} 
+      city={location.city} 
+      country={location.country} 
+      imageSource={imageSource} 
+      username={username}  
+      profile={profile}/> */}
+      {photos}
     </div>
   );
 };
