@@ -1,5 +1,5 @@
 import React from 'react';
-
+import PhotoFavButton from 'components/PhotoFavButton';
 import PhotoListItem from './components/PhotoListItem';
 import './App.scss';
 
@@ -31,14 +31,6 @@ const App = () => {
   const photos = new Array(3).fill(samplePhoto)
   return (
     <div className="App">
-      {/* <PhotoListItem 
-      key={id} 
-      id={id} 
-      city={location.city} 
-      country={location.country} 
-      imageSource={imageSource} 
-      username={username}  
-      profile={profile}/> */}
       {photos}
     </div>
   );
