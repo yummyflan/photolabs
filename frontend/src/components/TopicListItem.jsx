@@ -8,8 +8,8 @@ const sampleDataForTopicListItem = {
   label: "Nature",
 };
 
-const TopicListItem = () => {
-  const { id, slug, label} = sampleDataForTopicListItem;
+const TopicListItem = (props) => {
+  const {slug, label} = props;
   return (
     <div className="topic-list__item">
       <span>{label}</span>
