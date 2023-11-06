@@ -13,6 +13,7 @@ const PhotoListItem = (props) => {
     likedPhotos,
     setLikedPhotos,
     setModal,
+    similarPhotos
   } = props;
 
   const addToFav = (photoID) => {
@@ -35,7 +36,20 @@ const PhotoListItem = (props) => {
       <img
         src={imageSource}
         className="photo-list__image"
-        onClick={() => setModal({ value: true, id: photoID })}
+        onClick={() =>
+          setModal({
+            city,
+            country,
+            imageSource,
+            name,
+            profile,
+            photoID,
+            likedPhotos,
+            addToFav,
+            removeFromFav,
+            similarPhotos
+          })
+        }
       />
       <section className="photo-list__user-details">
         <img src={profile} className="photo-list__user-profile" />

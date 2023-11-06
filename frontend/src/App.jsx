@@ -7,13 +7,17 @@ import PhotoDetailsModal from "routes/PhotoDetailsModal";
 // Note: Rendering a single component to build components in isolation
 
 const App = () => {
-  const [openModal, setModal] = useState({ value: false, id: "" });
+  const [openModal, setModal] = useState((false));
   return (
     <div className="App">
-      <HomeRoute photos={photos} topics={topics} setModal={setModal} />
+      <HomeRoute
+        photos={photos}
+        topics={topics}
+        setModal={setModal}
+      />
 
-      {openModal.value && (
-        <PhotoDetailsModal setModal={setModal} photos={photos[openModal.id]} />
+      {openModal && (
+        <PhotoDetailsModal setModal={setModal} openModal={openModal} />
       )}
     </div>
   );

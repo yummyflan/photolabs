@@ -14,6 +14,7 @@ const PhotoList = (props) => {
         imageSource={photo.urls.full}
         name={photo.user.name}
         profile={photo.user.profile}
+        similarPhotos={photo.similar_photos}
         likedPhotos={likedPhotos}
         setLikedPhotos={setLikedPhotos}
         setModal={setModal}
