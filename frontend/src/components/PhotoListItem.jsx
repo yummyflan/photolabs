@@ -1,13 +1,25 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import PhotoFavButton from "./PhotoFavButton";
 import "../styles/PhotoListItem.scss";
+import photos from "mocks/photos";
 
 const PhotoListItem = (props) => {
-  const { id, city, country, imageSource, name, profile } = props;
+  const { city, country, imageSource, name, profile, photoID, likedPhotos, setLikedPhotos } = props;
+  const addToFav = (photoID) => {
+      setLikedPhotos([...likedPhotos, photoID])
+    };
+
+  const removeFromFav = (photoID) => {
+   const updatedPhotos = likedPhotos.filter((photo) =>
+    photo !== photoID)
+
+    setLikedPhotos(() => updatedPhotos);
+  };
+
   return (
-    <article className="photo-list__item">
-      <PhotoFavButton />
-      <img id={id} src={imageSource} className="photo-list__image" />
+    <article className="photo-list__item" id={photoID}>
+      <PhotoFavButton photoID={photoID} addToFav={addToFav} removeFromFav={removeFromFav}/>
+      <img src={imageSource} className="photo-list__image" />
       <section className="photo-list__user-details">
         <img src={profile} className="photo-list__user-profile" />
         <div className="photo-list__user-info">
