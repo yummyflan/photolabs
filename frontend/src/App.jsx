@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./App.scss";
 import HomeRoute from "routes/HomeRoute";
-import topics from "mocks/topics";
 import PhotoDetailsModal from "routes/PhotoDetailsModal";
 import useApplicationData from "hooks/useApplicationData";
 // Note: Rendering a single component to build components in isolation
@@ -15,12 +14,12 @@ const App = () => {
     openModal
   } = useApplicationData();
 
-  const { isModalOpen, likedPhotos, selectedPhotoData, photoData } = state;
+  const { isModalOpen, likedPhotos, selectedPhotoData, photoData, topicData } = state;
   return (
     <div className="App">
       <HomeRoute
         photos={photoData}
-        topics={topics}
+        topics={topicData}
         likedPhotos={likedPhotos}
         addToFav={addToFav}
         removeFromFav={removeFromFav}

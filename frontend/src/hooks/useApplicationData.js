@@ -91,6 +91,12 @@ const useApplicationData = () => {
     });
   }, []);
 
+  useEffect(() => {
+    axios.get("/api/topics").then((results) => {
+      dispatch({ type: GET_PHOTOS_BY_TOPICS, payload: results.data });
+    });
+  }, []);
+
   const addToFav = (photoID) => {
     dispatch({ type: FAV_PHOTO_ADDED, photoID: photoID });
   };
