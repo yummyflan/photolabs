@@ -2,7 +2,6 @@ import React from "react";
 import "../styles/HomeRoute.scss";
 import PhotoList from "components/PhotoList";
 import TopNavigationBar from "components/TopNavigationBar";
-import { useState } from "react";
 
 const HomeRoute = (props) => {
   const {
@@ -11,7 +10,8 @@ const HomeRoute = (props) => {
     addToFav,
     removeFromFav,
     likedPhotos,
-    setModal,
+    openModal,
+
   } = props;
   return (
     <div className="home-route">
@@ -20,7 +20,7 @@ const HomeRoute = (props) => {
         photos={photos}
         addToFav={addToFav}
         removeFromFav={removeFromFav}
-        setModal={setModal}
+        openModal={openModal}
       />
     </div>
   );

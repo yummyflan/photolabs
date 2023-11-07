@@ -13,7 +13,7 @@ const PhotoListItem = (props) => {
     similarPhotos,
     addToFav,
     removeFromFav,
-    setModal
+    openModal
   } = props;
 
   return (
@@ -26,19 +26,7 @@ const PhotoListItem = (props) => {
       <img
         src={imageSource}
         className="photo-list__image"
-        onClick={() =>
-          setModal({
-            city,
-            country,
-            imageSource,
-            name,
-            profile,
-            photoID,
-            addToFav,
-            removeFromFav,
-            similarPhotos
-          })
-        }
+        onClick={() => openModal(photoID, props)}
       />
       <section className="photo-list__user-details">
         <img src={profile} className="photo-list__user-profile" />

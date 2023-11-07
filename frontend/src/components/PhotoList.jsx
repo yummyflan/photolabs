@@ -7,7 +7,7 @@ const PhotoList = (props) => {
     photos,
     addToFav,
     removeFromFav,
-    setModal
+    openModal
   } = props;
   const parsedPhotos = photos.map((photo) => {
     return (
@@ -22,7 +22,7 @@ const PhotoList = (props) => {
         similarPhotos={photo.similar_photos}
         addToFav={addToFav}
         removeFromFav={removeFromFav}
-        setModal={setModal}
+        openModal={openModal}
       />
     );
   });

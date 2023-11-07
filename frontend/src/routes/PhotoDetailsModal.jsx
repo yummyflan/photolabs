@@ -5,7 +5,7 @@ import PhotoList from "components/PhotoList";
 import PhotoFavButton from "components/PhotoFavButton";
 
 const PhotoDetailsModal = (props) => {
-  const { onClosePhotoDetailsModal, openModal } = props;
+  const { onClosePhotoDetailsModal, selectedPhotoData } = props;
   const {
     city,
     country,
@@ -16,7 +16,9 @@ const PhotoDetailsModal = (props) => {
     addToFav,
     removeFromFav,
     similarPhotos,
-  } = openModal;
+    favActive,
+    onFav
+  } = selectedPhotoData;
   
   const preparedSimilarPhotos = Object.values(similarPhotos)
 
@@ -34,6 +36,8 @@ const PhotoDetailsModal = (props) => {
           photoID={photoID}
           addToFav={addToFav}
           removeFromFav={removeFromFav}
+          onFav={onFav}
+          favActive={favActive}
         />
         <img src={imageSource} className="photo-details-modal__image" />
           <section className="photo-details-modal__photographer-details">
