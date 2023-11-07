@@ -13,6 +13,7 @@ const HomeRoute = (props) => {
     openModal,
     getPhotosByTopics,
   } = props;
+
   return (
     <div className="home-route">
       <TopNavigationBar

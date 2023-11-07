@@ -17,10 +17,10 @@ const PhotoDetailsModal = (props) => {
     removeFromFav,
     similarPhotos,
     favActive,
-    onFav
+    onFav,
   } = selectedPhotoData;
-  
-  const preparedSimilarPhotos = Object.values(similarPhotos)
+
+  const preparedSimilarPhotos = Object.values(similarPhotos);
 
   return (
     <div className="photo-details-modal">
@@ -40,18 +40,18 @@ const PhotoDetailsModal = (props) => {
           favActive={favActive}
         />
         <img src={imageSource} className="photo-details-modal__image" />
-          <section className="photo-details-modal__photographer-details">
-            <img
-              src={profile}
-              className="photo-details-modal__photographer-profile"
-            />
-            <div className="photo-details-modal__photographer-info">
-              {name}
-              <div className="photo-details-modal__photographer-location">
-                {city}, {country}
-              </div>
+        <section className="photo-details-modal__photographer-details">
+          <img
+            src={profile}
+            className="photo-details-modal__photographer-profile"
+          />
+          <div className="photo-details-modal__photographer-info">
+            {name}
+            <div className="photo-details-modal__photographer-location">
+              {city}, {country}
             </div>
-          </section>
+          </div>
+        </section>
         <div className="photo-details-modal__header">Similar Photos</div>
         <PhotoList photos={preparedSimilarPhotos} />
       </article>

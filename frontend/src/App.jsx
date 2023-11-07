@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.scss";
 import HomeRoute from "routes/HomeRoute";
 import PhotoDetailsModal from "routes/PhotoDetailsModal";
@@ -12,10 +12,12 @@ const App = () => {
     removeFromFav,
     onClosePhotoDetailsModal,
     openModal,
-    getPhotosByTopics
+    getPhotosByTopics,
   } = useApplicationData();
 
-  const { isModalOpen, likedPhotos, selectedPhotoData, photoData, topicData } = state;
+  const { isModalOpen, likedPhotos, selectedPhotoData, photoData, topicData } =
+    state;
+    
   return (
     <div className="App">
       <HomeRoute
@@ -32,7 +34,7 @@ const App = () => {
         <PhotoDetailsModal
           onClosePhotoDetailsModal={onClosePhotoDetailsModal}
           selectedPhotoData={selectedPhotoData}
-          />
+        />
       )}
     </div>
   );

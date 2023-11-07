@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React from "react";
 import PhotoFavButton from "./PhotoFavButton";
 import "../styles/PhotoListItem.scss";
 
@@ -13,7 +13,7 @@ const PhotoListItem = (props) => {
     similarPhotos,
     addToFav,
     removeFromFav,
-    openModal
+    openModal,
   } = props;
 
   return (

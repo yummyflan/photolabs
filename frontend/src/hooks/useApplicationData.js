@@ -8,7 +8,7 @@ export const ACTIONS = {
   CLOSE_MODAL: "CLOSE_MODAL",
   SET_PHOTO_DATA: "SET_PHOTO_DATA",
   SET_TOPIC_DATA: "SET_TOPIC_DATA",
-  GET_PHOTOS_BY_TOPICS: "GET_PHOTOS_BY_TOPICS" 
+  GET_PHOTOS_BY_TOPICS: "GET_PHOTOS_BY_TOPICS",
 };
 
 function reducer(state, action) {
@@ -19,10 +19,11 @@ function reducer(state, action) {
     OPEN_MODAL,
     SET_PHOTO_DATA,
     SET_TOPIC_DATA,
-    GET_PHOTOS_BY_TOPICS
+    GET_PHOTOS_BY_TOPICS,
   } = ACTIONS;
 
   const photoID = action.photoID;
+  
   switch (action.type) {
     case FAV_PHOTO_ADDED:
       return {
@@ -60,12 +61,12 @@ function reducer(state, action) {
         ...state,
         topicData: action.payload,
       };
-    
+
     case GET_PHOTOS_BY_TOPICS:
       return {
         ...state,
         photoData: action.payload,
-      }
+      };
     default:
       throw new Error(
         `Tried to reduce with unsupported action type: ${action.type}`
@@ -90,7 +91,7 @@ const useApplicationData = () => {
     OPEN_MODAL,
     SET_PHOTO_DATA,
     SET_TOPIC_DATA,
-    GET_PHOTOS_BY_TOPICS
+    GET_PHOTOS_BY_TOPICS,
   } = ACTIONS;
 
   useEffect(() => {
@@ -109,7 +110,7 @@ const useApplicationData = () => {
     axios.get(`/api/topics/photos/${topicID}`).then((results) => {
       dispatch({ type: GET_PHOTOS_BY_TOPICS, payload: results.data });
     });
-}
+  };
 
   const addToFav = (photoID) => {
     dispatch({ type: FAV_PHOTO_ADDED, photoID: photoID });
@@ -133,10 +134,8 @@ const useApplicationData = () => {
     removeFromFav,
     openModal,
     onClosePhotoDetailsModal,
-    getPhotosByTopics
+    getPhotosByTopics,
   };
 };
 
 export default useApplicationData;
-
-
