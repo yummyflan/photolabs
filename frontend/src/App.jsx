@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./App.scss";
 import HomeRoute from "routes/HomeRoute";
-import photos from "mocks/photos";
 import topics from "mocks/topics";
 import PhotoDetailsModal from "routes/PhotoDetailsModal";
 import useApplicationData from "hooks/useApplicationData";
@@ -16,11 +15,11 @@ const App = () => {
     openModal
   } = useApplicationData();
 
-  const { isModalOpen, likedPhotos, selectedPhotoData } = state;
+  const { isModalOpen, likedPhotos, selectedPhotoData, photoData } = state;
   return (
     <div className="App">
       <HomeRoute
-        photos={photos}
+        photos={photoData}
         topics={topics}
         likedPhotos={likedPhotos}
         addToFav={addToFav}
