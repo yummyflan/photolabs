@@ -4,7 +4,7 @@ import FavIcon from "./FavIcon";
 import "../styles/PhotoFavButton.scss";
 
 function PhotoFavButton(props) {
-  const {addToFav, removeFromFav, photoID} = props;
+  const {addToFav, removeFromFav, photoID, likedPhotos} = props;
   const [liked, setLiked] = useState(false);
   const switchLiked = () => {
     setLiked(!liked);

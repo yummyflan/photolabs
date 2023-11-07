@@ -32,6 +32,7 @@ const PhotoListItem = (props) => {
         photoID={photoID}
         addToFav={addToFav}
         removeFromFav={removeFromFav}
+        likedPhotos={likedPhotos}
       />
       <img
         src={imageSource}
