@@ -3,10 +3,15 @@ import PhotoListItem from "./PhotoListItem";
 import "../styles/PhotoList.scss";
 
 const PhotoList = (props) => {
-  const {photos, likedPhotos, setLikedPhotos, setModal } = props;
+  const {
+    photos,
+    addToFav,
+    removeFromFav,
+    setModal
+  } = props;
   const parsedPhotos = photos.map((photo) => {
-    return(
-      <PhotoListItem 
+    return (
+      <PhotoListItem
         key={photo.id}
         photoID={photo.id}
         city={photo.location.city}
@@ -15,18 +20,14 @@ const PhotoList = (props) => {
         name={photo.user.name}
         profile={photo.user.profile}
         similarPhotos={photo.similar_photos}
-        likedPhotos={likedPhotos}
-        setLikedPhotos={setLikedPhotos}
+        addToFav={addToFav}
+        removeFromFav={removeFromFav}
         setModal={setModal}
       />
-    )
+    );
   });
 
-  return (
-    <ul className="photo-list">
-      {parsedPhotos}
-    </ul>
-  );
+  return <ul className="photo-list">{parsedPhotos}</ul>;
 };
 
 export default PhotoList;

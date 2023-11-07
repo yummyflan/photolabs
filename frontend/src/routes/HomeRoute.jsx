@@ -5,15 +5,21 @@ import TopNavigationBar from "components/TopNavigationBar";
 import { useState } from "react";
 
 const HomeRoute = (props) => {
-  const [likedPhotos, setLikedPhotos] = useState([]);
-  const { photos, topics, setModal} = props;
+  const {
+    photos,
+    topics,
+    addToFav,
+    removeFromFav,
+    likedPhotos,
+    setModal,
+  } = props;
   return (
     <div className="home-route">
       <TopNavigationBar topics={topics} isFavPhotoExist={likedPhotos.length} />
       <PhotoList
         photos={photos}
-        likedPhotos={likedPhotos}
-        setLikedPhotos={setLikedPhotos}
+        addToFav={addToFav}
+        removeFromFav={removeFromFav}
         setModal={setModal}
       />
     </div>

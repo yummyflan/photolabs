@@ -10,21 +10,11 @@ const PhotoListItem = (props) => {
     name,
     profile,
     photoID,
-    likedPhotos,
-    setLikedPhotos,
-    setModal,
-    similarPhotos
+    similarPhotos,
+    addToFav,
+    removeFromFav,
+    setModal
   } = props;
-
-  const addToFav = (photoID) => {
-    setLikedPhotos([...likedPhotos, photoID]);
-  };
-
-  const removeFromFav = (photoID) => {
-    const updatedPhotos = likedPhotos.filter((photo) => photo !== photoID);
-
-    setLikedPhotos(() => updatedPhotos);
-  };
 
   return (
     <article className="photo-list__item" id={photoID}>
@@ -32,7 +22,6 @@ const PhotoListItem = (props) => {
         photoID={photoID}
         addToFav={addToFav}
         removeFromFav={removeFromFav}
-        likedPhotos={likedPhotos}
       />
       <img
         src={imageSource}
@@ -45,7 +34,6 @@ const PhotoListItem = (props) => {
             name,
             profile,
             photoID,
-            likedPhotos,
             addToFav,
             removeFromFav,
             similarPhotos
