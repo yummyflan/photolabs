@@ -11,7 +11,8 @@ const App = () => {
     addToFav,
     removeFromFav,
     onClosePhotoDetailsModal,
-    openModal
+    openModal,
+    getPhotosByTopics
   } = useApplicationData();
 
   const { isModalOpen, likedPhotos, selectedPhotoData, photoData, topicData } = state;
@@ -24,6 +25,7 @@ const App = () => {
         addToFav={addToFav}
         removeFromFav={removeFromFav}
         openModal={openModal}
+        getPhotosByTopics={getPhotosByTopics}
       />
 
       {isModalOpen && (

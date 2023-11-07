@@ -11,11 +11,15 @@ const HomeRoute = (props) => {
     removeFromFav,
     likedPhotos,
     openModal,
-
+    getPhotosByTopics,
   } = props;
   return (
     <div className="home-route">
-      <TopNavigationBar topics={topics} isFavPhotoExist={likedPhotos.length} />
+      <TopNavigationBar
+        topics={topics}
+        isFavPhotoExist={likedPhotos.length}
+        getPhotosByTopics={getPhotosByTopics}
+      />
       <PhotoList
         photos={photos}
         addToFav={addToFav}
