@@ -2,8 +2,11 @@ import React from "react";
 import PhotoListItem from "./PhotoListItem";
 import "../styles/PhotoList.scss";
 
+// PhotoList component
 const PhotoList = (props) => {
-  const { photos, modifyFavList, openModal, likedPhotos, isModalOpen, closeModal } = props;
+  const { photos, likedPhotos, modifyFavList, openModal } = props;
+
+  // parse photos array and render PhotoListItem component
   const parsedPhotos = photos.map((photo) => {
     return (
       <PhotoListItem
@@ -13,13 +16,11 @@ const PhotoList = (props) => {
         country={photo.location.country}
         imageSource={photo.urls.full}
         name={photo.user.name}
-        profile={photo.user.profile}
+        profilePhoto={photo.user.profile}
         similarPhotos={photo.similar_photos}
-        openModal={openModal}
         likedPhotos={likedPhotos}
         modifyFavList={modifyFavList}
-        isModalOpen={isModalOpen}
-        closeModal={closeModal}
+        openModal={openModal}
       />
     );
   });

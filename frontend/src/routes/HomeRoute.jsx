@@ -3,16 +3,15 @@ import "../styles/HomeRoute.scss";
 import PhotoList from "components/PhotoList";
 import TopNavigationBar from "components/TopNavigationBar";
 
+// HomeRoute component
 const HomeRoute = (props) => {
   const {
     photos,
     topics,
-    modifyFavList,
     likedPhotos,
+    modifyFavList,
     openModal,
     getPhotosByTopics,
-    isModalOpen,
-    closeModal,
   } = props;
 
   return (
@@ -24,11 +23,9 @@ const HomeRoute = (props) => {
       />
       <PhotoList
         photos={photos}
+        likedPhotos={likedPhotos}
         modifyFavList={modifyFavList}
         openModal={openModal}
-        likedPhotos={likedPhotos}
-        isModalOpen={isModalOpen}
-        closeModal={closeModal}
       />
     </div>
   );

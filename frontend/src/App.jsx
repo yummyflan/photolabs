@@ -3,20 +3,18 @@ import "./App.scss";
 import HomeRoute from "routes/HomeRoute";
 import PhotoDetailsModal from "routes/PhotoDetailsModal";
 import useApplicationData from "hooks/useApplicationData";
-// Note: Rendering a single component to build components in isolation
 
+// Main App component
 const App = () => {
-  const {
-    state,
-    modifyFavList,
-    closeModal,
-    openModal,
-    getPhotosByTopics,
-  } = useApplicationData();
+  // destructure state and functions from custom hook
+  const { state, getPhotosByTopics, modifyFavList, openModal, closeModal } =
+    useApplicationData();
 
-  const { isModalOpen, likedPhotos, selectedPhotoData, photoData, topicData } =
+  const { photoData, topicData, likedPhotos, selectedPhotoData, isModalOpen } =
     state;
-    
+
+  // render HomeRoute and PhotoDetailsModal components
+  // isModalOpen is used to shortcircuit the PhotoDetailsModal component
   return (
     <div className="App">
       <HomeRoute
@@ -26,15 +24,13 @@ const App = () => {
         modifyFavList={modifyFavList}
         openModal={openModal}
         getPhotosByTopics={getPhotosByTopics}
-        isModalOpen={isModalOpen}
-        closeModal={closeModal}
       />
 
       {isModalOpen && (
         <PhotoDetailsModal
-          closeModal={closeModal}
-          selectedPhotoData={selectedPhotoData}
           photos={photoData}
+          selectedPhotoData={selectedPhotoData}
+          closeModal={closeModal}
         />
       )}
     </div>

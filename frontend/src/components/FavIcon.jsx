@@ -1,5 +1,7 @@
 import React from "react";
 
+// FavIcon component
+// when selected is true, fills heart icon with red
 const FavIcon = ({ displayAlert, selected }) => {
   return (
     <svg
