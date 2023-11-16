@@ -3,7 +3,7 @@ import PhotoListItem from "./PhotoListItem";
 import "../styles/PhotoList.scss";
 
 const PhotoList = (props) => {
-  const { photos, addToFav, removeFromFav, openModal } = props;
+  const { photos, modifyFavList, openModal, likedPhotos, isModalOpen, closeModal } = props;
   const parsedPhotos = photos.map((photo) => {
     return (
       <PhotoListItem
@@ -15,9 +15,11 @@ const PhotoList = (props) => {
         name={photo.user.name}
         profile={photo.user.profile}
         similarPhotos={photo.similar_photos}
-        addToFav={addToFav}
-        removeFromFav={removeFromFav}
         openModal={openModal}
+        likedPhotos={likedPhotos}
+        modifyFavList={modifyFavList}
+        isModalOpen={isModalOpen}
+        closeModal={closeModal}
       />
     );
   });

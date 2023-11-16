@@ -8,9 +8,8 @@ import useApplicationData from "hooks/useApplicationData";
 const App = () => {
   const {
     state,
-    addToFav,
-    removeFromFav,
-    onClosePhotoDetailsModal,
+    modifyFavList,
+    closeModal,
     openModal,
     getPhotosByTopics,
   } = useApplicationData();
@@ -24,16 +23,18 @@ const App = () => {
         photos={photoData}
         topics={topicData}
         likedPhotos={likedPhotos}
-        addToFav={addToFav}
-        removeFromFav={removeFromFav}
+        modifyFavList={modifyFavList}
         openModal={openModal}
         getPhotosByTopics={getPhotosByTopics}
+        isModalOpen={isModalOpen}
+        closeModal={closeModal}
       />
 
       {isModalOpen && (
         <PhotoDetailsModal
-          onClosePhotoDetailsModal={onClosePhotoDetailsModal}
+          closeModal={closeModal}
           selectedPhotoData={selectedPhotoData}
+          photos={photoData}
         />
       )}
     </div>

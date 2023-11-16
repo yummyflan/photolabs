@@ -2,30 +2,33 @@ import { ACTIONS } from "./useApplicationData";
 
 export default function reducer(state, action) {
   const {
-    FAV_PHOTO_ADDED,
-    FAV_PHOTO_REMOVED,
+    FAV_PHOTO_TOGGLED,
     CLOSE_MODAL,
     OPEN_MODAL,
     SET_PHOTO_DATA,
     SET_TOPIC_DATA,
     GET_PHOTOS_BY_TOPICS,
-    SET_ERROR
+    SET_ERROR,
   } = ACTIONS;
 
   const photoID = action.photoID;
-  
-  switch (action.type) {
-    case FAV_PHOTO_ADDED:
-      return {
-        ...state,
-        likedPhotos: [...state.likedPhotos, photoID],
-      };
 
-    case FAV_PHOTO_REMOVED:
-      return {
-        ...state,
-        likedPhotos: state.likedPhotos.filter((photo) => photo !== photoID),
-      };
+  switch (action.type) {
+
+    case FAV_PHOTO_TOGGLED:
+      if (state.likedPhotos.includes(photoID)) {
+        return {
+          ...state,
+          likedPhotos: state.likedPhotos.filter(
+            (id) => id !== photoID
+          ),
+        };
+      } else {
+        return {
+          ...state,
+          likedPhotos: [...state.likedPhotos, photoID],
+        };
+      }
 
     case OPEN_MODAL:
       return {
@@ -57,13 +60,13 @@ export default function reducer(state, action) {
         ...state,
         photoData: action.payload,
       };
-    
+
     case SET_ERROR:
       return {
         ...state,
         error: action.payload,
       };
-      
+
     default:
       throw new Error(
         `Tried to reduce with unsupported action type: ${action.type}`

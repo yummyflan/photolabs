@@ -3,8 +3,7 @@ import axios from "axios";
 import reducer from "./reducer";
 
 export const ACTIONS = {
-  FAV_PHOTO_ADDED: "FAV_PHOTO_ADDED",
-  FAV_PHOTO_REMOVED: "FAV_PHOTO_REMOVED",
+  FAV_PHOTO_TOGGLED: "FAV_PHOTO_TOGGLED",
   OPEN_MODAL: "OPEN_MODAL",
   CLOSE_MODAL: "CLOSE_MODAL",
   SET_PHOTO_DATA: "SET_PHOTO_DATA",
@@ -12,69 +11,6 @@ export const ACTIONS = {
   GET_PHOTOS_BY_TOPICS: "GET_PHOTOS_BY_TOPICS",
   SET_ERROR: "SET_ERROR",
 };
-
-// function reducer(state, action) {
-//   const {
-//     FAV_PHOTO_ADDED,
-//     FAV_PHOTO_REMOVED,
-//     CLOSE_MODAL,
-//     OPEN_MODAL,
-//     SET_PHOTO_DATA,
-//     SET_TOPIC_DATA,
-//     GET_PHOTOS_BY_TOPICS,
-//   } = ACTIONS;
-
-//   const photoID = action.photoID;
-  
-//   switch (action.type) {
-//     case FAV_PHOTO_ADDED:
-//       return {
-//         ...state,
-//         likedPhotos: [...state.likedPhotos, photoID],
-//       };
-
-//     case FAV_PHOTO_REMOVED:
-//       return {
-//         ...state,
-//         likedPhotos: state.likedPhotos.filter((photo) => photo !== photoID),
-//       };
-
-//     case OPEN_MODAL:
-//       return {
-//         ...state,
-//         isModalOpen: true,
-//         selectedPhotoData: action.photoProps,
-//       };
-
-//     case CLOSE_MODAL:
-//       return {
-//         ...state,
-//         isModalOpen: false,
-//       };
-
-//     case SET_PHOTO_DATA:
-//       return {
-//         ...state,
-//         photoData: action.payload,
-//       };
-
-//     case SET_TOPIC_DATA:
-//       return {
-//         ...state,
-//         topicData: action.payload,
-//       };
-
-//     case GET_PHOTOS_BY_TOPICS:
-//       return {
-//         ...state,
-//         photoData: action.payload,
-//       };
-//     default:
-//       throw new Error(
-//         `Tried to reduce with unsupported action type: ${action.type}`
-//       );
-//   }
-// }
 
 const initialState = {
   isModalOpen: false,
@@ -88,8 +24,7 @@ const initialState = {
 const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const {
-    FAV_PHOTO_ADDED,
-    FAV_PHOTO_REMOVED,
+    FAV_PHOTO_TOGGLED,
     CLOSE_MODAL,
     OPEN_MODAL,
     SET_PHOTO_DATA,
@@ -121,28 +56,23 @@ const useApplicationData = () => {
     });
   };
 
-  const addToFav = (photoID) => {
-    dispatch({ type: FAV_PHOTO_ADDED, photoID: photoID });
-  };
-
-  const removeFromFav = (photoID) => {
-    dispatch({ type: FAV_PHOTO_REMOVED, photoID: photoID });
-  };
+  const modifyFavList = (photoID) => {
+    dispatch({ type: FAV_PHOTO_TOGGLED, photoID: photoID });
+  }
 
   const openModal = (photoID, photoProps) => {
     dispatch({ type: OPEN_MODAL, photoID: photoID, photoProps: photoProps });
   };
 
-  const onClosePhotoDetailsModal = () => {
+  const closeModal = () => {
     dispatch({ type: CLOSE_MODAL });
   };
 
   return {
     state,
-    addToFav,
-    removeFromFav,
+    modifyFavList,
     openModal,
-    onClosePhotoDetailsModal,
+    closeModal,
     getPhotosByTopics,
   };
 };

@@ -5,7 +5,7 @@ import PhotoList from "components/PhotoList";
 import PhotoFavButton from "components/PhotoFavButton";
 
 const PhotoDetailsModal = (props) => {
-  const { onClosePhotoDetailsModal, selectedPhotoData } = props;
+  const { closeModal, selectedPhotoData, photos } = props;
   const {
     city,
     country,
@@ -13,20 +13,25 @@ const PhotoDetailsModal = (props) => {
     name,
     profile,
     photoID,
-    addToFav,
-    removeFromFav,
     similarPhotos,
-    favActive,
-    onFav,
+    likedPhotos,
+    modifyFavList,
+    openModal,
+    isModalOpen,
   } = selectedPhotoData;
 
   const preparedSimilarPhotos = Object.values(similarPhotos);
+  const similarPhotosIDs = preparedSimilarPhotos.map((photo) => photo.id);
+
+  const similarPhotosComplete = photos
+    .filter((photo) => similarPhotosIDs.includes(photo.id))
+    .map((photo) => ({ ...photo }));
 
   return (
     <div className="photo-details-modal">
       <button
         className="photo-details-modal__close-button"
-        onClick={() => onClosePhotoDetailsModal()}
+        onClick={() => closeModal()}
       >
         <img src={closeSymbol} alt="close symbol" />
       </button>
@@ -34,10 +39,8 @@ const PhotoDetailsModal = (props) => {
       <article className="photo-details-modal__images">
         <PhotoFavButton
           photoID={photoID}
-          addToFav={addToFav}
-          removeFromFav={removeFromFav}
-          onFav={onFav}
-          favActive={favActive}
+          modifyFavList={modifyFavList}
+          likedPhotos={likedPhotos}
         />
         <img src={imageSource} className="photo-details-modal__image" />
         <section className="photo-details-modal__photographer-details">
@@ -53,7 +56,14 @@ const PhotoDetailsModal = (props) => {
           </div>
         </section>
         <div className="photo-details-modal__header">Similar Photos</div>
-        <PhotoList photos={preparedSimilarPhotos} />
+        <PhotoList
+          photos={similarPhotosComplete}
+          likedPhotos={likedPhotos}
+          modifyFavList={modifyFavList}
+          openModal={openModal}
+          closeModal={closeModal}
+          isModalOpen={isModalOpen}
+        />
       </article>
     </div>
   );

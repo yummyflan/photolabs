@@ -11,22 +11,24 @@ const PhotoListItem = (props) => {
     profile,
     photoID,
     similarPhotos,
-    addToFav,
-    removeFromFav,
+    modifyFavList,
     openModal,
+    likedPhotos,
+    isModalOpen,
+    closeModal
   } = props;
 
   return (
     <article className="photo-list__item" id={photoID}>
       <PhotoFavButton
         photoID={photoID}
-        addToFav={addToFav}
-        removeFromFav={removeFromFav}
+        modifyFavList={modifyFavList}
+        likedPhotos={likedPhotos}
       />
       <img
         src={imageSource}
         className="photo-list__image"
-        onClick={() => openModal(photoID, props)}
+        onClick={() => {openModal(photoID, props)}}
       />
       <section className="photo-list__user-details">
         <img src={profile} className="photo-list__user-profile" />

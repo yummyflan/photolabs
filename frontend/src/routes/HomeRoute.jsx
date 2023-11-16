@@ -7,11 +7,12 @@ const HomeRoute = (props) => {
   const {
     photos,
     topics,
-    addToFav,
-    removeFromFav,
+    modifyFavList,
     likedPhotos,
     openModal,
     getPhotosByTopics,
+    isModalOpen,
+    closeModal,
   } = props;
 
   return (
@@ -23,9 +24,11 @@ const HomeRoute = (props) => {
       />
       <PhotoList
         photos={photos}
-        addToFav={addToFav}
-        removeFromFav={removeFromFav}
+        modifyFavList={modifyFavList}
         openModal={openModal}
+        likedPhotos={likedPhotos}
+        isModalOpen={isModalOpen}
+        closeModal={closeModal}
       />
     </div>
   );
