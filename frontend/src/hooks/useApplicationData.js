@@ -98,19 +98,13 @@ const useApplicationData = () => {
   } = ACTIONS;
 
   useEffect(() => {
-    axios.get("/api/photos")
+    Promise.all([
+      axios.get("/api/photos"),
+      axios.get("/api/topics"),
+    ])
     .then((results) => {
-      dispatch({ type: SET_PHOTO_DATA, payload: results.data });
-    })
-    .catch((error) => {
-      dispatch({ type: SET_ERROR, payload: error.message });
-    });
-  }, []);
-
-  useEffect(() => {
-    axios.get("/api/topics")
-    .then((results) => {
-      dispatch({ type: SET_TOPIC_DATA, payload: results.data });
+      dispatch({ type: SET_PHOTO_DATA, payload: results[0].data });
+      dispatch({ type: SET_TOPIC_DATA, payload: results[1].data }); 
     })
     .catch((error) => {
       dispatch({ type: SET_ERROR, payload: error.message });
