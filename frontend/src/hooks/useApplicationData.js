@@ -1,5 +1,6 @@
 import { useReducer, useEffect } from "react";
 import axios from "axios";
+import reducer from "./reducer";
 
 export const ACTIONS = {
   FAV_PHOTO_ADDED: "FAV_PHOTO_ADDED",
@@ -9,70 +10,71 @@ export const ACTIONS = {
   SET_PHOTO_DATA: "SET_PHOTO_DATA",
   SET_TOPIC_DATA: "SET_TOPIC_DATA",
   GET_PHOTOS_BY_TOPICS: "GET_PHOTOS_BY_TOPICS",
+  SET_ERROR: "SET_ERROR",
 };
 
-function reducer(state, action) {
-  const {
-    FAV_PHOTO_ADDED,
-    FAV_PHOTO_REMOVED,
-    CLOSE_MODAL,
-    OPEN_MODAL,
-    SET_PHOTO_DATA,
-    SET_TOPIC_DATA,
-    GET_PHOTOS_BY_TOPICS,
-  } = ACTIONS;
+// function reducer(state, action) {
+//   const {
+//     FAV_PHOTO_ADDED,
+//     FAV_PHOTO_REMOVED,
+//     CLOSE_MODAL,
+//     OPEN_MODAL,
+//     SET_PHOTO_DATA,
+//     SET_TOPIC_DATA,
+//     GET_PHOTOS_BY_TOPICS,
+//   } = ACTIONS;
 
-  const photoID = action.photoID;
+//   const photoID = action.photoID;
   
-  switch (action.type) {
-    case FAV_PHOTO_ADDED:
-      return {
-        ...state,
-        likedPhotos: [...state.likedPhotos, photoID],
-      };
+//   switch (action.type) {
+//     case FAV_PHOTO_ADDED:
+//       return {
+//         ...state,
+//         likedPhotos: [...state.likedPhotos, photoID],
+//       };
 
-    case FAV_PHOTO_REMOVED:
-      return {
-        ...state,
-        likedPhotos: state.likedPhotos.filter((photo) => photo !== photoID),
-      };
+//     case FAV_PHOTO_REMOVED:
+//       return {
+//         ...state,
+//         likedPhotos: state.likedPhotos.filter((photo) => photo !== photoID),
+//       };
 
-    case OPEN_MODAL:
-      return {
-        ...state,
-        isModalOpen: true,
-        selectedPhotoData: action.photoProps,
-      };
+//     case OPEN_MODAL:
+//       return {
+//         ...state,
+//         isModalOpen: true,
+//         selectedPhotoData: action.photoProps,
+//       };
 
-    case CLOSE_MODAL:
-      return {
-        ...state,
-        isModalOpen: false,
-      };
+//     case CLOSE_MODAL:
+//       return {
+//         ...state,
+//         isModalOpen: false,
+//       };
 
-    case SET_PHOTO_DATA:
-      return {
-        ...state,
-        photoData: action.payload,
-      };
+//     case SET_PHOTO_DATA:
+//       return {
+//         ...state,
+//         photoData: action.payload,
+//       };
 
-    case SET_TOPIC_DATA:
-      return {
-        ...state,
-        topicData: action.payload,
-      };
+//     case SET_TOPIC_DATA:
+//       return {
+//         ...state,
+//         topicData: action.payload,
+//       };
 
-    case GET_PHOTOS_BY_TOPICS:
-      return {
-        ...state,
-        photoData: action.payload,
-      };
-    default:
-      throw new Error(
-        `Tried to reduce with unsupported action type: ${action.type}`
-      );
-  }
-}
+//     case GET_PHOTOS_BY_TOPICS:
+//       return {
+//         ...state,
+//         photoData: action.payload,
+//       };
+//     default:
+//       throw new Error(
+//         `Tried to reduce with unsupported action type: ${action.type}`
+//       );
+//   }
+// }
 
 const initialState = {
   isModalOpen: false,
@@ -80,6 +82,7 @@ const initialState = {
   likedPhotos: [],
   photoData: [],
   topicData: [],
+  error: null,
 };
 
 const useApplicationData = () => {
@@ -95,20 +98,32 @@ const useApplicationData = () => {
   } = ACTIONS;
 
   useEffect(() => {
-    axios.get("/api/photos").then((results) => {
+    axios.get("/api/photos")
+    .then((results) => {
       dispatch({ type: SET_PHOTO_DATA, payload: results.data });
+    })
+    .catch((error) => {
+      dispatch({ type: SET_ERROR, payload: error.message });
     });
   }, []);
 
   useEffect(() => {
-    axios.get("/api/topics").then((results) => {
+    axios.get("/api/topics")
+    .then((results) => {
       dispatch({ type: SET_TOPIC_DATA, payload: results.data });
+    })
+    .catch((error) => {
+      dispatch({ type: SET_ERROR, payload: error.message });
     });
   }, []);
 
   const getPhotosByTopics = (topicID) => {
-    axios.get(`/api/topics/photos/${topicID}`).then((results) => {
+    axios.get(`/api/topics/photos/${topicID}`)
+    .then((results) => {
       dispatch({ type: GET_PHOTOS_BY_TOPICS, payload: results.data });
+    })
+    .catch((error) => {
+      dispatch({ type: SET_ERROR, payload: error.message });
     });
   };
 
